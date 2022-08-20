@@ -1,0 +1,159 @@
+
+        <html xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta http-equiv=Content-Type content="text/html;  
+        charset=utf-8">
+		<style type="text/css">
+			table  
+			{  
+				border-collapse: collapse;
+				border: none;  
+				width: 100%;  
+			}  
+			td  
+			{  
+				border: solid #CCC 1px;  
+			}  
+			.codestyle{
+				word-break: break-all;
+				background:silver;mso-highlight:silver;
+			}
+		</style>
+        <meta name=ProgId content=Word.Document>
+        <meta name=Generator content="Microsoft Word 11">
+        <meta name=Originator content="Microsoft Word 11">
+        <xml><w:WordDocument><w:View>Print</w:View></xml></head>
+        <body><h1>1、方法</h1><div style="margin-left:20px;"><h2>1.1、全局配置</h2><div style="margin-left:20px;"><h3>layui.config</h3>
+<pre><code class="language-js">layui.config({
+    version: false,      // 更新模块缓存  false/true/版本号
+    debug: false,
+    base: './src'        //设定扩展的Layui模块的所在目录，一般用于外部模块扩展
+});</code></pre></table></div><h2>1.2、定义模块</h2><div style="margin-left:20px;"><h3>layui.define([mods], callback)</h3>
+<pre><code class="language-js">layui.define([mods], function (exports) {
+    // ...do something (related with mods)
+    exports('mod', function () {
+        //...  输出接口
+    });
+})</code></pre></table>
+<p>与AMD相似，exports方式不同，ADM第二个参数是工厂函数或直接返回的对象。</p></div><h2>1.3、加载所需模块</h2><div style="margin-left:20px;"><h3>layui.use([mods], callback)</h3>
+<pre><code class="language-js">layui.use(['laypage','layedit'], function () {
+      var laypage = layui.laypage;
+      var layedit = layui.layedit;
+      //do something
+});</code></pre></table>
+<pre><code class="language-js">layui.use(['laypage', 'layedit'], function(laypage, layedit) {  // 返回了模块接口
+    // 使用分页
+    laypage();
+    // 建立编辑器
+    layedit.build();
+});</code></pre></table>
+<p>与SeaJS相似，都是使用use</p></div><h2>1.4、动态加载CSS</h2><div style="margin-left:20px;"><h3>layui.link(href)</h3>
+<pre><code class="language-js">// 一般只是用于动态加载你的外部CSS文件
+layui.link(href)</code></pre></table></div><h2>1.5、本地存储</h2><div style="margin-left:20px;"><h3>localStorage</h3>
+<pre><code class="language-js">layui.data(table, settings);</code></pre></table>
+<h3>sessionStorage</h3>
+<pre><code class="language-js">layui.sessionData(table, settings);</code></pre></table>
+<h3>示例</h3>
+<pre><code class="language-js">//【增】
+layui.data('test', {
+  key: 'nickname'
+  ,value: '贤心'
+});
+
+//【删】
+layui.data('test', {
+  key: 'nickname'
+  ,remove: true           // 删除test表的nickname字段
+});
+layui.data('test', null); // 删除test表
+//【改】：同【增】，会覆盖已经存储的数据
+//【查】
+var localTest = layui.data('test');
+console.log(localTest.nickname); </code></pre></table></div><h2>1.6、返回设备信息</h2><div style="margin-left:20px;"><h3>lay.device([key])</h3>
+<pre><code class="language-js">{
+    os: &quot;windows&quot; //底层操作系统，windows、linux、mac等
+    ,ie: false //ie6-11的版本，如果不是ie浏览器，则为false
+    ,weixin: false //是否微信环境
+    ,android: false //是否安卓系统
+    ,ios: false //是否ios系统
+}</code></pre></table>
+<pre><code class="language-js">var device = layui.device('myapp');
+if(device.myapp){
+    alert('在我的App环境');
+}</code></pre></table></div><h2>1.7、模块别名</h2><div style="margin-left:20px;"><h3>layui.extend(options)</h3>
+<pre><code class="language-js">layui.extend({
+    test: '/res/js/test'
+});</code></pre></table>
+<pre><code class="language-js">layui.config({
+  base: '/res/js/'   //假设这是你存放拓展模块的根目录
+}).extend({
+  mymod: 'mymod'         //如果 mymod.js 是在根目录，也可以不用设定别名
+  ,mod1: 'admin/mod1'    //相对于上述 base 目录的子目录
+});</code></pre></table>
+<pre><code class="language-js">// 忽略 base 设定的根目录，直接在 extend 指定路径（主要：该功能为 layui 2.2.0 新增）
+layui.extend({
+  mod2: '{/}http://cdn.xxx.com/lib/mod2' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+})</code></pre></table></div><h2>1.8、其它</h2><div style="margin-left:20px;"><ul>
+<li>
+<p>layui.cache   静态属性。获得一些配置及临时的缓存信息</p>
+</li>
+<li>
+<p>layui.each(obj, fn)   对象（Array、Object、DOM对象等）遍历，可用于取代for语句</p>
+</li>
+<li>
+<p>layui.getStyle(node, name)    获得一个原始DOM节点的style属性值，如：layui.getStyle(document.body, 'font-size')</p>
+</li>
+<li>
+<p>layui.img(url, callback, error)   图片预加载</p>
+</li>
+<li>
+<p>layui.sort(obj, key, desc)    将数组中的对象按某个成员重新对该数组排序，如：layui.sort([{a: 3},{a: 1},{a: 5}], 'a')</p>
+</li>
+<li>
+<p>layui.router()    获得location.hash路由，目前在Layui中没发挥作用。对做单页应用会派上用场。</p>
+</li>
+<li>
+<p>layui.hint()  向控制台打印一些异常信息，目前只返回了error方法：layui.hint().error('出错啦')</p>
+</li>
+<li>
+<p>layui.stope(e)    阻止事件冒泡</p>
+</li>
+<li>
+<p>layui.onevent(modName, events, callback)  自定义模块事件，属于比较高级的应用。有兴趣的同学可以阅读layui.js源码以及form模块</p>
+</li>
+<li>
+<p>layui.event(modName, events, params)  执行自定义模块事件，搭配onevent使用</p>
+</li>
+<li>layui.factory(modName)    用于获取模块对应的 define 回调函数</li>
+</ul></div></div><h1>2、要点</h1><div style="margin-left:20px;"><h2>2.1、jQuery依赖</h2><div style="margin-left:20px;"><p>首先判断你的页面是否已经引入了jQuery，如果没有，则加载内部的jQuery模块，如果有，则不会加载</p></div></div><h1>3、页面元素</h1><div style="margin-left:20px;"><h2>3.1、CSS命名规范</h2><div style="margin-left:20px;"><ol>
+<li>layui-模块名-状态或类型
+<table width='100%' class='codestyle'><pre><code>class=&quot;layui-btn layui-btn-primary&quot;</code></pre></table></li>
+<li>layui-状态或类型（公共类）
+<table width='100%' class='codestyle'><pre><code>class=&quot;layui-inline&quot;</code></pre></table></li>
+</ol></div><h2>3.2、HTML常用公共属性</h2><div style="margin-left:20px;"><pre><code class="language-html">&lt;button class=&quot;layui-btn&quot; lay-submit lay-filter=&quot;login&quot;&gt;登入&lt;/button&gt;    </code></pre></table>
+<table>
+<thead><tr style='background-color: rgb(0, 136, 204); color: rgb(255, 255, 255);'>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">lay-skin=''</td>
+<td style="text-align: left;">定义相同元素的不同风格，如checkbox的开关风格</td>
+</tr>
+<tr>
+<td style="text-align: left;">lay-filter=''</td>
+<td style="text-align: left;">事件过滤器。监听特定的自定义事件。可以看作是ID选择器</td>
+</tr>
+<tr>
+<td style="text-align: left;">lay-submit</td>
+<td style="text-align: left;">定义一个触发表单提交的button，不用填写值</td>
+</tr>
+</tbody>
+</table></div></div><h1>4、模块规范</h1><div style="margin-left:20px;"><h2>4.1、预先加载</h2><div style="margin-left:20px;"><h3>预先加载</h3>
+<p><code>一个JS文件中，写一个use即可。</code></p>
+<h3>按需加载，不推荐</h3>
+<p><code>触发一个动作的时候，才去加载模块</code></p></div><h2>4.2、模块命名空间</h2><div style="margin-left:20px;"><p>推荐将所有的业务代码都写在一个大的 use 回调中</p></div></div></body></html>

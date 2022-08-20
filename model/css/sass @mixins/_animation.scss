@@ -1,0 +1,131 @@
+@import "var";
+
+.fade-in {
+	animation: fadeIn .3s linear;
+    -webkit-animation-fill-mode: forwards;
+	// -webkit-backface-visibility: hidden; //隐藏转换的元素的背面    
+    // -webkit-transform-style: preserve-3d; //使被转换的元素的子元素保留其 3D 转换    
+    // -webkit-transform: translate3d(0,0,0);
+}
+.enter-from-right {
+	animation: enterFromRight .3s linear;
+}
+.bounceInUp {
+	-webkit-animation:bounceInUp 1s;
+	animation:bounceInUp 1s;
+}
+.slide-in-up {
+	animation: slideInUp .3s linear;
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes enterFromRight {
+	0% {
+		transform: translate(120%, 0);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+@keyframes enterFromRight {
+	0% {
+		transform: translate(120%, 0);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+@-webkit-keyframes slideInUp {
+	0% {
+		-webkit-transform:translate3d(0,100%,0);
+		transform:translate3d(0,100%,0);
+		visibility:visible
+	}
+	100% {
+		-webkit-transform:translate3d(0,0,0);
+		transform:translate3d(0,0,0)
+	}
+}
+@keyframes slideInUp {
+	0% {
+		-webkit-transform:translate3d(0,100%,0);
+		transform:translate3d(0,100%,0);
+		visibility:visible
+	}
+	100% {
+		-webkit-transform:translate3d(0,0,0);
+		transform:translate3d(0,0,0)
+	}
+}
+@-webkit-keyframes bounceInUp {
+	0%,100%,60%,75%,90% {
+		-webkit-animation-timing-function:cubic-bezier(0.215,.61,.355,1);
+		animation-timing-function:cubic-bezier(0.215,.61,.355,1)
+	}
+	0% {
+		opacity:0;
+		-webkit-transform:translate3d(0,3000px,0);
+		transform:translate3d(0,3000px,0)
+	}
+	60% {
+		opacity:1;
+		-webkit-transform:translate3d(0,-20px,0);
+		transform:translate3d(0,-20px,0)
+	}
+	75% {
+		-webkit-transform:translate3d(0,10px,0);
+		transform:translate3d(0,10px,0)
+	}
+	90% {
+		-webkit-transform:translate3d(0,-5px,0);
+		transform:translate3d(0,-5px,0)
+	}
+	100% {
+		-webkit-transform:translate3d(0,0,0);
+		transform:translate3d(0,0,0)
+	}
+}
+@keyframes bounceInUp {
+	0%,100%,60%,75%,90% {
+		-webkit-animation-timing-function:cubic-bezier(0.215,.61,.355,1);
+		animation-timing-function:cubic-bezier(0.215,.61,.355,1)
+	}
+	0% {
+		opacity:0;
+		-webkit-transform:translate3d(0,3000px,0);
+		transform:translate3d(0,3000px,0)
+	}
+	60% {
+		opacity:1;
+		-webkit-transform:translate3d(0,-20px,0);
+		transform:translate3d(0,-20px,0)
+	}
+	75% {
+		-webkit-transform:translate3d(0,10px,0);
+		transform:translate3d(0,10px,0)
+	}
+	90% {
+		-webkit-transform:translate3d(0,-5px,0);
+		transform:translate3d(0,-5px,0)
+	}
+	100% {
+		-webkit-transform:translate3d(0,0,0);
+		transform:translate3d(0,0,0)
+	}
+}

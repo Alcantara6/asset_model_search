@@ -1,0 +1,8 @@
+.proto {
+    height: 100px; 
+    background: #fcb;
+}
+.children {
+    width: 50px; 
+    background: #edb
+}

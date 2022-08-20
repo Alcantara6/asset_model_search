@@ -1,0 +1,19 @@
+@mixin triangle($hrz, $w, $h) {
+  @include bg-line($hrz, 0, 0, transparent);
+  @if $hrz == left {
+    &:before {
+      box-sizing: content-box !important;
+      border-left: $w solid #e1c078;
+      border-top: $h/2 solid transparent;
+      border-bottom: $h/2 solid transparent;
+    }
+  }
+  @if $hrz == right {
+    &:after {
+      box-sizing: content-box !important;
+      border-left: $w solid #e1c078;
+      border-top: $h/2 solid transparent;
+      border-bottom: $h/2 solid transparent;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<div class="change-order" (click)="changeOrder()">
+  <span [ngClass]="{'primary-text': orderWay.orderBy == orderValue}">{{sortText}}</span>
+  <div class="order-icon-box">
+    <i [ngClass]="{'on': orderWay.orderBy == orderValue && orderWay.order == 'ascend'}"  nz-icon nzType="caret-up" nzTheme="outline"></i>
+    <i [ngClass]="{'on': orderWay.orderBy == orderValue && orderWay.order == 'descend'}" nz-icon nzType="caret-down" nzTheme="outline"></i>
+  </div>
+</div>

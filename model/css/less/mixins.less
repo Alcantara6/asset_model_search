@@ -1,0 +1,81 @@
+// Mixins
+
+.a,
+#b {
+    color: red;
+}
+
+.mixin-class {
+    .a();
+}
+
+.mixin-id {
+    #b();
+}
+
+// 1. Not Outputting the Mixin
+// put parentheses after the mixin definition
+
+.my-other-mixin() {
+    background: white;
+}
+
+.class {
+    .my-other-mixin();
+}
+
+// 2. Selectors in Mixins
+
+.my-hover-mixin() {
+    &:hover {
+        border: 1px solid red;
+    }
+}
+
+// 3. Namespaces
+
+#outer() {
+    .inner {
+        color: red;
+    }
+}
+
+.c {
+    // all do the same thing
+    #outer>.inner();
+    #outer .inner();
+    #outer.inner();
+}
+
+// 4. Guarded Namespaces？
+
+// 5. The !important keyword
+
+.foo (@bg: #f5f5f5, @color: #900) {
+    background: @bg;
+    color: @color;
+}
+
+.important {
+    .foo() !important;
+}
+
+// 6. Parametric Mixins
+// It is legal to define multiple mixins with the same name and number of parameters.
+// Named Parameters
+// The @arguments Variable
+// Advanced Arguments and the @rest Variable?
+.mixin(@color) {
+    color: @color;
+}
+
+.mixin(@color; @padding: 2) {
+    color: @color;
+    padding: @padding;
+}
+
+.mixin(@color; @padding; @margin: 2) {
+    color: @color;
+    padding: @padding;
+    margin: @margin @margin @margin @margin;
+}

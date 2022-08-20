@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#qa {
+			max-height: 80%;
+			overflow: auto;
+			padding-bottom: 10%;
+		}
+		.qaModel {
+			float: left;
+			margin: 10px;
+			padding: 0;
+		}
+		#result-text {
+			position: fixed;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			background: #998F8F;
+			color: #fff;
+		}
+		#result-text input {
+			color: #333;
+		}
+	</style>
+	<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+</head>
+<body>
+	<button id="add" class="am-btn-primary">添加</button>
+	<div id="qa"></div>
+	<h4 id="result-text">
+		<button id="create" class="am-btn-success">生成</button>
+		<button id="reset" class="am-btn-warning">还原</button>
+		<div>
+			<input style="width: 70%; height: 30px; margin: 10px 20px 30px;" type="text" id="jsonString">
+		</div>
+	</h4>
+	<script>
+		var qs = function (selector, node) {
+			node = node || document;
+			return node.querySelector(selector);
+		}
+		var qsAll = function (selector, node) {
+			node = node || document;
+			return node.querySelectorAll(selector);
+		}
+        var qaDiv = qs('#qa');
+
+        var renderQa = function (q, a) {
+        	q = q || '';
+        	a = a || '';
+			var field = document.createElement('fieldset');
+			field.className = 'qaModel';
+			field.innerHTML = `	
+				<legend>问答</legend>
+				<span>问题</span>
+				<textarea name="question" class="question" cols="80" rows="3">${q}</textarea>
+				<br />
+				<span>回答</span>
+				<textarea name="answer" class="answer" cols="80" rows="6">${a}</textarea>
+				<button class="delete am-btn-danger" data-type="del">删除</button>`
+				qaDiv.appendChild(field);
+        }
+        qs('#add').addEventListener('click', function () {
+            renderQa();
+        });
+        qs('#create').addEventListener('click', function () {
+		    var result = [];
+            var QAS = qsAll('.qaModel');
+            if (!QAS) {
+            	return false;
+            }
+            for (var qa of QAS) {
+                var q = qs('.question', qa);
+                var a = qs('.answer', qa);
+                if(!q.value || !a.value) {
+                	alert('问题或回答填写不完整');
+                	return false;
+                }
+                var QA = {'q': q.value, 'a': a.value}
+                result.push(QA);
+                qs('#jsonString').value = JSON.stringify(result);
+            }
+        });
+        qs('#reset').addEventListener('click', function () {
+            while (qaDiv.firstChild) {
+                qaDiv.removeChild(qaDiv.firstChild);
+            }
+        	var result = qs('#jsonString');
+            if(typeof result.value === 'string') {
+            	var qaGroups = JSON.parse(result.value);
+        		for (var qa of qaGroups) {
+        	        renderQa(qa.q, qa.a);
+        		}
+            }
+        });
+        document.addEventListener('click', function (e) {
+        	if (e.target.dataset.type === 'del') {
+        		var curQa = e.target;
+        		qaDiv.removeChild(curQa.parentNode);
+        	}
+        });
+	</script>
+</body>
+</html>

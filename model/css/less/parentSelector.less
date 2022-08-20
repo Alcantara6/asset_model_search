@@ -1,0 +1,61 @@
+// repetitive class names
+
+.button {
+    &-ok {
+        background-image: url("ok.png");
+    }
+
+    &-cancel {
+        background-image: url("cancel.png");
+    }
+
+    &-custom {
+        background-image: url("custom.png");
+    }
+}
+
+// Multiple 不常用
+
+// Note that & represents all parent selectors (not just the nearest ancestor)
+// 所以最好不要嵌套2层以上
+
+// Combinatorial Explosion
+
+p,
+a,
+ul,
+li {
+    border-top: 2px dotted #366;
+
+    &+& {
+        border-top: 0;
+    }
+}
+
+// 编译后
+
+p,
+a,
+ul,
+li {
+    border-top: 2px dotted #366;
+}
+
+p+p,
+p+a,
+p+ul,
+p+li,
+a+p,
+a+a,
+a+ul,
+a+li,
+ul+p,
+ul+a,
+ul+ul,
+ul+li,
+li+p,
+li+a,
+li+ul,
+li+li {
+    border-top: 0;
+}

@@ -1,0 +1,349 @@
+
+        <html xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta http-equiv=Content-Type content="text/html;  
+        charset=utf-8">
+		<style type="text/css">
+			table  
+			{  
+				border-collapse: collapse;
+				border: none;  
+				width: 100%;  
+			}  
+			td  
+			{  
+				border: solid #CCC 1px;  
+			}  
+			.codestyle{
+				word-break: break-all;
+				background:silver;mso-highlight:silver;
+			}
+		</style>
+        <meta name=ProgId content=Word.Document>
+        <meta name=Generator content="Microsoft Word 11">
+        <meta name=Originator content="Microsoft Word 11">
+        <xml><w:WordDocument><w:View>Print</w:View></xml></head>
+        <body><h1>1、数组字符串公共方法</h1><div style="margin-left:20px;"><h2>1.1、includes</h2><div style="margin-left:20px;"><h3>includes</h3>
+<pre><code class="language-js">str.includes('foo');
+str.includes('foo', 3);</code></pre></table></div><h2>1.2、indexOf/lastIndexOf</h2><div style="margin-left:20px;"><pre><code class="language-js">var numbers = [1,2,3,4,5,4,3,2,1];
+// 比较时使用===全等操作符,return Number类型
+console.log(numbers.indexOf(4));           //3
+console.log(numbers.lastIndexOf(4));       //5
+console.log(numbers.indexOf(4,4));         //5
+console.log(numbers.lastIndexOf(4,4));     //3
+// 注：lastIndexOf方法将从尾到头地检索字符串，即fromindex 位置之前</code></pre></table></div><h2>1.3、concat</h2><div style="margin-left:20px;"><pre><code class="language-js">var a = [1,2,3];
+var b = a.concat();  // 深拷贝数组</code></pre></table>
+<pre><code class="language-js">var colors = [&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;];
+var colors2 = colors.concat(&quot;yellow&quot;,[&quot;black&quot;,&quot;brown&quot;]);</code></pre></table></div><h2>1.4、slice</h2><div style="margin-left:20px;"><pre><code class="language-js">var colors = [&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;yellow&quot;,&quot;purple&quot;];
+var colors2 = colors.slice(1);
+var colors3 = colors.slice(1,4);
+var colors4 = colors.slice(-2,-1);  // slice(3,4) length-位</code></pre></table></div></div><h1>2、数组方法</h1><div style="margin-left:20px;"><h2>2.1、sort</h2><div style="margin-left:20px;"><h3>默认</h3>
+<pre><code class="language-js">// 调用toStirng()，对位排序
+array.sort();</code></pre></table>
+<h3>顺序</h3>
+<pre><code class="language-js">// 从小到大排序
+array.sort(function(value1, value2) {
+    return value1 - value2;
+});</code></pre></table>
+<h3>随机</h3>
+<pre><code class="language-js">array.sort(function () {
+    return 0.5 - Math.random();
+});</code></pre></table></div><h2>2.2、去重</h2><div style="margin-left:20px;"><h3>Set</h3>
+<pre><code class="language-js">[...new Set([1,2,2,3])]</code></pre></table>
+<pre><code class="language-js">Array.from(new Set([1,2,2,3]))</code></pre></table>
+<pre><code class="language-js">arr.indexOf(item) !== arr.lastIndexOf(item)</code></pre></table></div><h2>2.3、splice</h2><div style="margin-left:20px;"><pre><code class="language-js">arr.splice(pos, deleNumer, insertItems);</code></pre></table></div><h2>2.4、迭代</h2><div style="margin-left:20px;"><p>forEach: 无法中途跳出循环，break命令或return命令都不能奏效。</p>
+<pre><code class="language-js">var numbers = [1,2,3,4,5,4,3,2,1];
+//(1)every()都满足
+var everyResult = numbers.every(function(item,index,array) {
+    return (item&gt;2);
+});
+console.log(everyResult);           //false
+//(2)一项满足即可
+var someResult = numbers.some(function(item,index,array) {
+    return (item&gt;2);
+});
+console.log(someResult);            //true
+//(3)找出满足的项
+var filterResult = numbers.filter(function(item,index,array) {
+    return (item&gt;2);
+});
+console.log(filterResult);          //[3,4,5,4,3]
+//(4)找出满足的第一项
+var findFirstEle = numbers.find(function(item,index,array) {
+    return (item&gt;2);
+});
+console.log(findFirstEle);          //3
+//(4)找出满足的第一项的序数
+var findFirstEleIndex = numbers.findIndex(function(item,index,array) {
+    return (item&gt;2);
+});
+console.log(findFirstEleIndex);          //2
+//(5)对每一项操作并返回 —— 不改变原数组
+var numbers = [1,2,3,4,5,4,3,2,1];
+var mapResult = numbers.map(function(item,index,array) {
+    return (item*2);
+});
+console.log(mapResult);         //[2,4,6,8,10,8,6,4,2]
+console.log(numbers);           //[1,2,3,4,5,4,3,2,1]
+//(6)对每一项操作但不返回 —— 改变原数组
+var numbers = [1,2,3,4,5,4,3,2,1];
+numbers.forEach(function(item,index,array) {    //相当于for循环
+    array[index] = item*2;
+});
+console.log(numbers);          //[2,4,6,8,10,8,6,4,2]</code></pre></table></div><h2>2.5、Array.from</h2><div style="margin-left:20px;"><p>转化:</p>
+<ul>
+<li>类似数组的对象（array-like object）</li>
+<li>可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
+<h3>一般用法</h3>
+<pre><code class="language-js">// ES5的写法
+var arr1 = [].slice.call(arrayLike);</code></pre></table>
+<pre><code class="language-js">// ES6的写法
+var arr1 = Array.from(arrayLike);</code></pre></table></li>
+</ul>
+<h3>含第2个参数</h3>
+<pre><code class="language-js">Array.from(arrayLike, x =&gt; x * x);</code></pre></table>
+<pre><code class="language-js">Array.from([1, , 2, , 3], (n) =&gt; n || 0)</code></pre></table>
+<h3>特殊用处</h3>
+<pre><code class="language-js">Array.from({ length: 2 })  // [undefined, undefined]
+Array.from({ length: 2 }, () =&gt; 'jack')  // // ['jack', 'jack']</code></pre></table>
+<pre><code class="language-js">// 可以避免 JavaScript 将大于\uFFFF的 Unicode 字符，算作两个字符的 bug
+function countSymbols(string) {
+  return Array.from(string).length;
+}</code></pre></table>
+<h3>备注</h3>
+<ol>
+<li>扩展运算符背后调用的是遍历器接口（Symbol.iterator）</li>
+<li>任何有length属性的对象，都可以通过Array.from方法转为数组，而此时扩展运算符就无法转换，例如对象。</li>
+</ol></div><h2>2.6、fill</h2><div style="margin-left:20px;"><pre><code class="language-js">['a', 'b', 'c'].fill(7)</code></pre></table>
+<pre><code class="language-js">new Array(3).fill(7)  // 初始化一个数组</code></pre></table>
+<pre><code class="language-js">['a', 'b', 'c'].fill(7, 1, 2)  // ['a', 7, 'c']</code></pre></table>
+<p>注意，如果填充的类型为对象，那么被赋值的是同一个内存地址的对象，而不是深拷贝对象。</p>
+<pre><code class="language-js">let arr = new Array(3).fill({name: &quot;Mike&quot;});
+arr[0].name = &quot;Ben&quot;;
+arr
+// [{name: &quot;Ben&quot;}, {name: &quot;Ben&quot;}, {name: &quot;Ben&quot;}]</code></pre></table></div><h2>2.7、entries/keys/values</h2><div style="margin-left:20px;"><pre><code class="language-js">for (let index of ['a', 'b'].keys()) {
+  console.log(index);
+}
+// 0
+// 1</code></pre></table>
+<pre><code class="language-js">for (let elem of ['a', 'b'].values()) {
+  console.log(elem);
+}
+// 'a'
+// 'b'</code></pre></table>
+<pre><code class="language-js">for (let [index, elem] of ['a', 'b'].entries()) {
+  console.log(index, elem);
+}
+// 0 &quot;a&quot;
+// 1 &quot;b&quot;</code></pre></table></div><h2>2.8、reverse</h2><div style="margin-left:20px;"><pre><code class="language-js">[1,2,3,4,5].reverse();</code></pre></table></div></div><h1>3、字符串方法</h1><div style="margin-left:20px;"><h2>3.1、startsWith/endsWith</h2><div style="margin-left:20px;"><h3>startsWith/endsWith</h3>
+<pre><code class="language-js">str.startsWith('s', 5);   // 从第5位开始</code></pre></table>
+<pre><code class="language-js">'christmas'.endsWith('s', 5);   // true.前5个字符</code></pre></table></div><h2>3.2、repeat</h2><div style="margin-left:20px;"><pre><code class="language-js">'na'.repeat(2);  //'nana'
+'na'.repeat(2.9);  //'nana'</code></pre></table>
+<pre><code class="language-js">'na'.repeat(0);  // ''
+'na'.repeat('2'); // ''  '2'先转为NaN
+'na'.repeat('-0.9'); // ''  '-0.9'先转为-0</code></pre></table></div><h2>3.3、split</h2><div style="margin-left:20px;"></div><h2>3.4、match</h2><div style="margin-left:20px;"><p>正则表达式</p></div><h2>3.5、search</h2><div style="margin-left:20px;"><p>正则表达式</p></div></div><h1>4、对象</h1><div style="margin-left:20px;"><h2>4.1、Object.defineProperty</h2><div style="margin-left:20px;"><ol>
+<li>JavaScript高级程序设计 <code>chapter 6.1.1</code> <code>chapter6.1.2</code></li>
+<li>MVVM示例</li>
+</ol>
+<pre><code class="language-javascript">let obj = {};
+let song = '发如雪';
+obj.singer = '周杰伦';
+
+Object.defineProperty(obj, 'music', {
+    // 1. value: '七里香',
+    configurable: true,        // 2. 可以配置对象，删除属性
+    // writable: true,         // 3. 可以修改对象的值
+    enumerable: true,          // 4. 可以枚举
+    // ☆ get,set设置时不能设置writable和value，它们代替了二者且是互斥的
+    get() {                    // 5. 获取obj.music的时候就会调用get方法
+        return song;
+    },
+    set(val) {                 // 6. 将修改的值重新赋给song
+        song = val;   
+    }
+});
+
+// 下面打印的部分分别是对应代码写入顺序执行
+console.log(obj);   // {singer: '周杰伦', music: '七里香'}  // 1
+
+delete obj.music;   // 如果想对obj里的属性进行删除，configurable要设为true  2
+console.log(obj);   // 此时为  {singer: '周杰伦'}
+
+obj.music = '听妈妈的话';   // 如果想对obj的属性进行修改，writable要设为true  3
+console.log(obj);          // {singer: '周杰伦', music: &quot;听妈妈的话&quot;}
+
+for (let key in obj) {    
+    // 默认情况下通过defineProperty定义的属性是不能被枚举(遍历)的
+    // 需要设置enumerable为true才可以
+    // 不然你是拿不到music这个属性的，你只能拿到singer
+    console.log(key);   // singer, music    4
+}
+
+console.log(obj.music);   // '发如雪'  5
+obj.music = '夜曲';       // 调用set设置新的值
+console.log(obj.music);   // '夜曲'    6</code></pre></table></div><h2>4.2、Object.getOwnPropertyDescriptor</h2><div style="margin-left:20px;"><pre><code class="language-js">// _year是数据属性
+var descriptor = Object.getOwnPropertyDescriptor(book, &quot;_year&quot;); 
+alert(descriptor.value);                     //2004
+alert(descriptor.configurable);              //false
+alert(typeof descriptor.get);                //undefined</code></pre></table>
+<pre><code class="language-js">// year是访问器属性
+var descriptor = Object.getOwnPropertyDescriptor(book, &quot;year&quot;);
+alert(descriptor.value);                    //undefined
+alert(descriptor.enumerable);               //false
+alert(typeof descriptor.get);               //&quot;function&quot;</code></pre></table></div></div><h1>5、遍历</h1><div style="margin-left:20px;"><h2>5.1、for-of</h2><div style="margin-left:20px;"><p>不同于forEach方法，它可以与break、continue和return配合使用。</p>
+<h3>数组</h3>
+<p>返回值</p>
+<table width='100%' class='codestyle'><pre><code>var arr = ['a', 'b', 'c', 'd'];
+for (let a of arr) {
+  console.log(a); // a b c d
+}</code></pre></table>
+<p>entries(): <code>[索引，键值]</code></p>
+<h3>Set结构</h3>
+<p>返回值</p>
+<pre><code class="language-js">var engines = new Set([&quot;Gecko&quot;, &quot;Trident&quot;, &quot;Webkit&quot;, &quot;Webkit&quot;]);
+for (var e of engines) {
+  console.log(e);
+}
+// Gecko
+// Trident
+// Webkit</code></pre></table>
+<p>entries(): <code>[键值，键值]</code></p>
+<h3>Map结构</h3>
+<p>返回数组</p>
+<pre><code class="language-js">let map = new Map().set('a', 1).set('b', 2);
+for (let pair of map) {
+  console.log(pair);
+}
+// ['a', 1]
+// ['b', 2]</code></pre></table>
+<pre><code class="language-js">for (let [key, value] of map) {
+  console.log(key + ' : ' + value);
+}
+// a : 1
+// b : 2</code></pre></table>
+<p>entries(): <code>[键名，键值]</code></p>
+<h3>类似数组</h3>
+<ul>
+<li>字符串</li>
+<li>nodelist</li>
+<li>arguments</li>
+<li>Array.from({length: 2})</li>
+</ul></div><h2>5.2、for-in</h2><div style="margin-left:20px;"><h3>数组</h3>
+<pre><code class="language-js">var arr = ['a', 'b', 'c', 'd'];
+for (let a in arr) {
+  console.log(a); // 0 1 2 3
+}</code></pre></table>
+<h3>对象</h3>
+<p>所有实例属性（包括将原型中的非Enumerable属型屏蔽的） + 原型中的可枚举的属性</p>
+<p><code>for...in循环有几个缺点</code></p>
+<ol>
+<li>数组的键名是数字，但是for...in循环是以字符串作为键名“0”、“1”、“2”等等。</li>
+<li>for...in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。</li>
+<li>某些情况下，for...in循环会以任意顺序遍历键名。</li>
+</ol></div></div><h1>6、正则表达式</h1><div style="margin-left:20px;"><h2>6.1、特殊字符</h2><div style="margin-left:20px;"><p>贪婪模式会匹配尽可能长的字符串，而非贪婪模式在第一次匹配成功后就会停止匹配。</p>
+<pre><code class="language-js">{m,n}?  {m,}?  ??  *?  +?</code></pre></table>
+<table>
+<thead><tr style='background-color: rgb(0, 136, 204); color: rgb(255, 255, 255);'>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">备注</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">匹配前一个表达式0次或多次。等价于 {0,}</td>
+</tr>
+<tr>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">匹配前面一个表达式1次或者多次。等价于 {1,}</td>
+</tr>
+<tr>
+<td style="text-align: left;">?</td>
+<td style="text-align: left;">匹配前面一个表达式0次或者1次。等价于 {0,1}。</td>
+<td style="text-align: left;">如果紧跟在任何量词 *、 +、? 或 {} 的后面，将会使量词变为<code>非贪婪</code>的（匹配尽量少的字符），和缺省使用的<code>贪婪模式</code>（匹配尽可能多的字符）正好相反。</td>
+<td style="text-align: left;">/{{(.*?)}}/gi.exec('{{a.b}} {{c}}')只匹配{{a,b}}</td>
+</tr>
+<tr>
+<td style="text-align: left;">.</td>
+<td style="text-align: left;">除换行符之外的任何单个字符</td>
+<td style="text-align: left;">除换行符</td>
+</tr>
+<tr>
+<td style="text-align: left;">[xyz]</td>
+<td style="text-align: left;">字符集合</td>
+</tr>
+<tr>
+<td style="text-align: left;">[^xyz]</td>
+<td style="text-align: left;">反向字符集</td>
+</tr>
+<tr>
+<td style="text-align: left;">x竖线y</td>
+<td style="text-align: left;">匹配x或y</td>
+</tr>
+<tr>
+<td style="text-align: left;">{n}</td>
+</tr>
+<tr>
+<td style="text-align: left;">{n,m}</td>
+</tr>
+<tr>
+<td style="text-align: left;">(x)</td>
+<td style="text-align: left;">捕获括号</td>
+</tr>
+<tr>
+<td style="text-align: left;">(?:foo)</td>
+<td style="text-align: left;">非捕获括号</td>
+<td style="text-align: left;">如果表达式是 /foo{1,2}/，{1,2}将只对 ‘foo’ 的最后一个字符 ’o‘ 生效。如果使用非捕获括号，则{1,2}会匹配整个 ‘foo’ 单词</td>
+</tr>
+<tr>
+<td style="text-align: left;">x(?=y)</td>
+<td style="text-align: left;">匹配'x'仅仅当'x'后面跟着'y'</td>
+<td style="text-align: left;"><code>先行断言</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">(?<=y)x</td>
+<td style="text-align: left;">匹配'x'仅仅当'x'前面是'y'</td>
+<td style="text-align: left;"><code>后行断言</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead><tr style='background-color: rgb(0, 136, 204); color: rgb(255, 255, 255);'>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">备注</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">\d</td>
+<td style="text-align: left;">数字</td>
+</tr>
+<tr>
+<td style="text-align: left;">\D</td>
+<td style="text-align: left;">非数字</td>
+</tr>
+<tr>
+<td style="text-align: left;">\s</td>
+<td style="text-align: left;">空白字符</td>
+<td style="text-align: left;">空格、制表符、换页符和换行符</td>
+</tr>
+<tr>
+<td style="text-align: left;">\S</td>
+<td style="text-align: left;">非空白字符</td>
+</tr>
+<tr>
+<td style="text-align: left;">\w</td>
+<td style="text-align: left;">数字、字母、下划线</td>
+</tr>
+<tr>
+<td style="text-align: left;">\W</td>
+<td style="text-align: left;">非单字字符</td>
+</tr>
+</tbody>
+</table></div></div></body></html>

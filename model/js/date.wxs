@@ -1,0 +1,26 @@
+module.exports = {
+	present: function () {
+		var date = getDate().toLocaleString();
+		return date;
+	}
+	deadline: function (time) {
+		var reg = getRegExp('\\d{4}-\\d{2}-\\d{2}','i');
+		console.log(reg);
+		console.log(time);
+		var time = reg.exec(time);
+		return time;
+	},
+	deadlineMonth: function (time) {
+		var reg = getRegExp('\\d{4}-\\d{2}-\\d{2}','i');
+		if (time) {
+            console.log(time);
+            var _time = reg.exec(time)[0];
+            var month = getDate(_time).getMonth() + 1;
+            return month;
+		}
+	},
+	deadlineDay: function (time) {
+		var day = getDate().getDate();
+		return day;
+	}
+}

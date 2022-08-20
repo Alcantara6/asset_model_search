@@ -1,0 +1,91 @@
+@import "mixins.styl"
+.popup
+    fullScreen()
+    .popup-shade
+        shade()
+    .popup-inner
+        absCtr()
+        left: 0
+        top: 2.55rem
+        width: 85.733%
+        max-width: 6.43rem
+        overflow: hidden
+        background: #fff
+        border: .06rem solid #e5e5e5
+        border-radius: .2rem
+        .popup-close
+            width: .42rem
+            height: .42rem
+            position: absolute
+            z-index: 2
+            top: .16rem
+            right: .16rem
+            background: transparent url("data:image/png;base64,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") no-repeat center
+            background-size: 90%
+        .popup-title
+            height: .8rem
+            line-height: .8rem
+            text-align: center
+            font-size: 32px
+            font-weight: 400
+        .popup-content
+            max-height: 4rem
+            min-height: 3rem
+            overflow: auto
+            .login-inner
+                position: relative
+                margin: .2rem .3rem
+                color: #666
+                .login-input
+                    margin: .1rem 0
+                    height: .9rem
+                    border-bottom: 1px solid #a4a4a4
+                    input
+                        padding-top: .2rem
+                        font-size: 26px
+                .login-code
+                    display: flex
+                    align-items: center
+                    input
+                        flex: 2
+                        font-size: 26px
+                    button
+                        flex: 1
+                        height: .62rem
+                        padding: 0 .05rem
+                        font-size: 24px
+                        color: #de4c39
+                        border: 1px solid #de4c39
+                        border-radius: .05rem
+                        background #fff
+            .parag-inner
+                margin: .3rem .4rem
+            .popup-mark
+                margin: .2rem .3rem
+                .login-agree
+                    display: flex
+                    align-items: center
+                    i
+                        display: block
+                        margin-right: .1rem
+                        width: .3rem
+                        height: .3rem
+                        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADG0lEQVRYw+3ZT2hcVRTH8c9MopggtYQQoRStzz8Y1IVYSK5/KLhpFxeKVHSjqIjoQlSwBhfiTtAiVuzO+gftQsR/iE+sgtAi8lqllFq0IvKsaKutsdaKTf0TdHFfoQTN/Ml0ZhY5m1nMzH3fe865v3vOeTUoY1iJhxEwggG9sVkcQYEnsrz4tFbGMIGNOIad2IeZHgEO4VJMYinuH8QUfsM7eA8Hs7w40Qu6MoazsAw/Yy2mamUMB/ActmR58XWPPDcX9GLchjvqUs7tw/e9BjvFvsMejNSlAzHTq7D+l1UsMxio9xqmkS0CLgL22ga7/cAyhjGMYyzLi9f6CrCMYQnW4GYMlzH8gQ/mk7iuhbiM4Qxch1uqz0skT87rpG7m4GW4CyvxNz7HSxoUJl0JcRnDUqyXyrkzsRdTWV782Oi/3fLgo1iFJfgSj0sebGin1YNlDMNSVXIDRvEVtmB7lhd/9RSwCuu1uA9j+AHv4u0sL442u85pCXEZw9mYkNqI86WCeCtezfJifytrNfRgGcMAbsIhfNEosauq+CrcgyvxJ7bj5Swv9rS62Xk9WGnX1bgXD2JdGUPWYM3LpbxbhX+wG89gV6twzXhwCKuxQqq8z8NIGcMr+CbLi9k5G1ohCfFqSU724xHsbvZQtOTBLC+O4Ul8hF8l9b9b0rRzq/CfhBvG7YjVZg5Xv9uV5cXxduAaAlaQR6UQPy/1LaO4ES9g2SmQt2Idlkv5uhHbFtpKNHWKs7yYxrPVQz+TQj+BN3F9GcNa3IkL8BNyvNGJPqdpmcny4lu8hU1SyOtSk/0UHpPC/3v13eYsLw4uFK4lwArygCS2m/C+dNFfhAulE/sJXmxHTjoCWEEewYfYUMEekrRur3SNbesUXFuAFeQJSd8ewuvYgc3Y2q6c/J+1fRdXGjiN9WUMozi+EDnpOOAc2OlOg520vu/qFgE7ATiLoapM6gurWIYwW5dmwuPSZLNfbDmuwC+DkoZN4nAZQ7+MgNdIdWhRK2OYxNNSOfWx3g/Rx3ENzsEDtYp8QhqmT+qP1xA7sCHLi53/Alxj+QRBwpN4AAAAAElFTkSuQmCC") no-repeat;
+                        background-size: 100%
+                    span
+                        font-size: 24px
+                    .agree-message
+                        color: #de4c39
+                .login-msg
+                    color: #de4c39
+                    min-height: .6rem
+                    padding: .1rem 0
+                    font-size: 20px
+        .popup-button
+                display: flex
+                height: 1rem 
+                button
+                    flex: 1
+                    color: #fff
+                    font-size: 32px
+                    text-align: center

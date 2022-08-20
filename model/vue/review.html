@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">  <!-- lang="en-US" -->
+    <head>
+        <script src="https://unpkg.com/vue"></script>
+        <title>Vue review</title>
+	</head>
+	<link rel="stylesheet" href="review.css" />
+    <body>
+    <div id="example">
+        <div :style="{display: ['-webkit-box', '-ms-flexbox', 'flex']}"></div>
+	    <div class="aboutKey">
+            <!-- 条件渲染: key -->
+			<div class="vifKey">
+				<template v-if="loginUser">
+				    <label for="Username"></label>
+				    <input type="text" placeholder="enter username" key='username-input' id="Username">
+				</template>
+				<template v-else>
+				    <label for="Email"></label>
+				    <input type="email" placeholder="enter email address" key='email-input' id="Email">
+				</template>
+				<button v-on:click="loginUser = !loginUser">切换登录方式</button>
+			</div>
+			<!-- 列表渲染：key -->
+			<div class='vforKey'>
+				<!-- 组件中使用v-for时，key是必须的 -->
+				<ul>
+	                <li v-for="(item,index) in items" :key="item.id">{{ index }}, {{ item.name }}</li>
+				</ul>
+			</div>
+			<!-- 表单 -->
+			<input type="checkbox" true-value="yes" false-value="no" v-model="checked" />
+			<label for="">{{ checked }}</label>
+	    </div>
+	    <!-- 内联语句处理器访问原生事件，$event -->
+	    <!-- 事件修饰符 -->
+	    <div class="aboutEvent">
+            <div class="proto" v-on:click.ctrl.stop.prevent.self.once="protoEvent('only trigger on parent ele for once', $event)">
+				$event传入原生事件对象
+                <div class='children'>子元素</div>
+            </div>
+	    </div>
+	    <!-- 组件 -->
+	    <child v-bind:my-obj='comObj'></child>
+	    <!-- 把一个对象的所有属性作为prop传递,props必须写comObj对应的key,而不是一个单独对象 -->
+	    <child-partial v-bind='comObj'></child-partial>
+    </div>
+    <script src='review.js'></script>
+    </body>
+</html>

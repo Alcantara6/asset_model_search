@@ -1,0 +1,113 @@
+@import '../assets/scss/support';
+/**
+ * 遮罩 $shade()
+ */
+.popup-shade {
+    @include shade;
+}
+/**
+ * 弹窗
+ */
+.popup-wrapper {
+    @include popup(510rpx, 0rpx, 174rpx, #fff, 10rpx);
+}
+/**
+ * 标题
+ */
+.popup-title {
+    height: 86rpx;
+    border-bottom: 2rpx solid $theme;
+    @include flex;
+    .popup-close {
+        position: absolute;
+        left: 0rpx;
+        width: 86rpx;
+        height: 86rpx;
+        @include flex();
+        .popup-close-img {
+            width: 20rpx;
+            height: 20rpx;
+        }
+    }
+    .popup-title-text {
+        @include s-line($fs: 34rpx, $fw: 700);
+    }
+}
+/**
+ * 主体
+ */
+.popup-inner {
+    padding: 32rpx 29rpx;
+    /* 文字内容 */
+    .popup-text {
+        @include s-line($fs: 30rpx);
+        margin-bottom: 20rpx;
+    }
+    /*表单*/
+    .popup-form {
+        /*表单行*/
+        .popup-input-item {
+            height: 76rpx;
+            border-top:1rpx solid #e6e6e6;
+            display: flex;
+            align-items: center;
+            &:first-child {
+            }
+            .input-label {
+                flex-basis: 120rpx;
+                font-size: 30rpx;
+            }
+            >input {
+                @include wx-input($h: 100%, $mg-l: 24rpx, $fs: 24rpx);
+            }
+            .input-placeholder {
+            }
+            .v-code {
+                @include v-code(0rpx, 2rpx, 24rpx, $colorRed);
+                .v-code-wait {
+                }
+                .v-code-finish {
+                    border-bottom: 2rpx solid $colorRed;
+                }
+            }
+        }
+        /* 单选 */
+        .popup-radio-item,.popup-checkbox-item {
+            // height: 76rpx;
+            // line-height: 76rpx;
+            // @include flex($jus: left);
+            // .radio {
+            //     @include wx-radio(.8);
+            // }
+        }
+        .wx-radio-input {
+            // border-color: $theme;
+            // margin-right: 60rpx;
+        }
+        /*协议*/
+        .popup-agree {
+            // @include s-line($jus: left);
+            // .agree-msg {
+            //     color: $theme;
+            // }
+        }
+        /*提交*/
+        .form-submit {
+            /*提示*/
+            .popup-msg{
+                @include s-line($h: 30rpx, $lh: 30rpx, $fs: 24rpx, $color: $theme, $jus: left);
+            }
+            /*按钮*/
+            .popup-buttons {
+                display: flex;
+            }
+            .popup-btn {
+                @include m-btn($h: 86rpx, $fs: 32rpx, $fw: 700, $color: #fff, $bgc: $theme, $rds: 10rpx);
+            }
+        }
+    }
+    /* 备注更多 */
+    .popup-remark {
+        
+    }
+}

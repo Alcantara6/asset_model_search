@@ -1,0 +1,57 @@
+// DYR
+// 从表面看来，extend与混合器最大的差别，就是extend是同个选择器共用同一个声明，
+// 而混合器是使用自己的声明，这无疑增加了代码的重复性。
+
+.d {
+    color: #fff;
+}
+
+// 1. Extend Syntax
+
+// 1.1 keyword all
+.c:extend(.d all) {
+    // extends all instances of ".d" e.g. ".x.d" or ".d.x" or ".d::after"
+    font-size: 12px;
+}
+
+.c:extend(.d) {
+    // extends only instances where the selector will be output as just ".d"
+    font-size: 14px;
+}
+
+// 1.2  one or more classes to extend,
+.e:extend(.f, .g) {
+    font-size: 16px;
+}
+
+// 2. Extend attached to Selector
+
+// 2.1 Space between selector and extend is allowed:
+
+// 2.2 Multiple extends 
+pre:hover:extend(div pre):extend(.bucket tr) {
+    font-size: 18px;
+}
+pre:hover:extend(div pre, .bucket tr) {
+    font-size: 20px;
+}
+
+// 2.3 Multiple selectors with extend
+.big-division,
+.big-bag:extend(.bag),
+.big-bucket:extend(.bucket) {
+    font-size: 22px;
+}
+
+// 2.4 Extend must be last
+
+// 3. Extend Inside Ruleset
+
+pre:hover,
+.some-class {
+    &:extend(div pre);
+}
+
+// 4. Extending Nested Selectors
+
+

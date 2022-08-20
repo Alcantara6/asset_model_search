@@ -1,0 +1,17 @@
+// Typographic
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+// element
+.shade(@opacity: 0.8; @z-index: 100) {
+    z-index: @z-index;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, @opacity);
+}

@@ -1,0 +1,62 @@
+<!--weiauth.wxml-->
+<view class="popup-shade" wx:if="{{ options.opc }}" style="opacity: {{ options.opc }}"></view>
+<view class="popup-wrapper">
+    <!-- 标题 -->
+    <view class="popup-title" wx:if="{{ options.title }}">
+        <view class="popup-close" bindtap="onClose">
+            <image class="popup-close-img" src="/images/close.png"></image>
+         </view>   
+        <view class="popup-title-text">{{ options.title }}</view>
+    </view>
+    <view class="popup-inner">
+        <!-- 文本段落 -->
+        <view class="popup-text" wx:if="{{ options.text }}">{{ options.text }}</view>
+        <!-- 表单 -->
+        <form class="popup-form" wx:if="{{ options.form }}" bindsubmit="confirm">
+            <!-- 手机验证码登录 -->
+            <block wx:if="{{ options.form.login }}">
+                <view class="popup-input-item">
+                    <view class="input-label">手机号码</view>
+                    <input name="phone" maxlength="11" type="number" placeholder="请输入手机号码" placeholder-class="input-placeholder" bindinput="phoneInput" />
+                </view>
+                <view class="popup-input-item">
+                    <view class="input-label">验证码</view>
+                    <input name="vcode" maxlength="6" type="number" placeholder="请输入验证码" placeholder-class="input-placeholder" value="{{vcode}}" />
+                    <view class="v-code v-code-wait" wx:if="{{seconds!=cseconds}}">
+                        <text class="v-code-wait">{{cseconds}}秒</text>
+                    </view>
+                    <view class="v-code" wx:else bindtap="onCode"><text class="v-code-finish">获取验证码</text></view>
+                </view>
+            </block>
+            <!-- 协议 -->
+            <view wx:if="{{ options.form.login.agreement }}" class="popup-agree">
+                <i></i>
+                <text>我已同意</text><text class="agree-msg" bindtap="popupAgreement">《{{ options.form.agreement }}》</text>
+            </view>
+            <!-- 单选 -->
+            <radio-group wx:if="{{options.form.radio}}" name="radioOpt" bindchange="change">
+                <label class="popup-radio-item" wx:for="{{ checkboxItems }}" wx:key="index">
+                    <radio class="radio" color="#c52728" value="{{ item.value }}" checked="{{ item.text == checkedItem }}">{{ item.text }}</radio>
+                </label>
+            </radio-group>
+            <!-- 按钮 -->
+            <view class="form-submit">
+                <view class="popup-msg">{{ msg }}</view>
+                <view class="popup-buttons">
+                    <button 
+                        class="popup-btn" 
+                        wx:for="{{ options.buttons }}" 
+                        form-type="{{ item.btnType === 'submit' || 'reset'?item.btnType:'' }}" 
+                        open-type="getUserInfo"
+                        style="background-color: {{ item.bgc }};" 
+                        wx:key="index"
+                    >
+                        {{ item.btnText }}
+                    </button>
+                </view>
+            </view>
+        </form>
+        <!-- 备注更多 -->
+        <view class="popup-remark"></view>
+    </view>
+</view>

@@ -1,0 +1,61 @@
+
+        <html xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta http-equiv=Content-Type content="text/html;  
+        charset=utf-8">
+		<style type="text/css">
+			table  
+			{  
+				border-collapse: collapse;
+				border: none;  
+				width: 100%;  
+			}  
+			td  
+			{  
+				border: solid #CCC 1px;  
+			}  
+			.codestyle{
+				word-break: break-all;
+				background:silver;mso-highlight:silver;
+			}
+		</style>
+        <meta name=ProgId content=Word.Document>
+        <meta name=Generator content="Microsoft Word 11">
+        <meta name=Originator content="Microsoft Word 11">
+        <xml><w:WordDocument><w:View>Print</w:View></xml></head>
+        <body><h1>1、指令</h1><div style="margin-left:20px;"><h2>1.1、v-model</h2><div style="margin-left:20px;"><p><code>v-model</code></p>
+<ol>
+<li>text 和 textarea 元素使用 value 属性和 input 事件；</li>
+<li>checkbox 和 radio 使用 checked 属性和 change 事件；</li>
+<li>select 字段将 value 作为 prop 并将 change 作为事件。</li>
+</ol>
+<h3>文本</h3>
+<pre><code class="language-html">&lt;input v-model=&quot;message&quot; /&gt;</code></pre></table>
+<h3>多行文本</h3>
+<pre><code class="language-html">&lt;textarea v-model=&quot;message&quot;&gt;&lt;/textarea&gt;</code></pre></table>
+<h3>单个复选框</h3>
+<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; v-model=&quot;checked&quot; /&gt;</code></pre></table>
+<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; true-value=&quot;yes&quot; false-value=&quot;no&quot; v-model=&quot;checked&quot; /&gt;</code></pre></table>
+<h3>多个复选框</h3>
+<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; value=&quot;A&quot; v-model=&quot;checkedNames&quot; /&gt;
+&lt;input type=&quot;checkbox&quot; value=&quot;B&quot; v-model=&quot;checkedNames&quot; /&gt;</code></pre></table>
+<h3>单选框</h3>
+<pre><code class="language-html">&lt;input type=&quot;radio&quot; value=&quot;A&quot; v-model=&quot;picked&quot; /&gt;
+&lt;input type=&quot;radio&quot; value=&quot;B&quot; v-model=&quot;picked&quot; /&gt;</code></pre></table>
+<pre><code class="language-html">&lt;input type=&quot;radio&quot; v-bind:value=&quot;C&quot; v-model=&quot;picked&quot; /&gt;
+&lt;input type=&quot;radio&quot; V-bind:value=&quot;D&quot; v-model=&quot;picked&quot; /&gt;</code></pre></table>
+<h3>选择框（多选multiple）</h3>
+<pre><code class="language-html">&lt;select multiple v-model=&quot;selected&quot;&gt;
+    &lt;option disabled value=&quot;&quot;&gt;请选择&lt;/option&gt;
+    &lt;option value=&quot;A&quot;&gt;A&lt;/option&gt;
+    &lt;option value=&quot;B&quot;&gt;B&lt;/option&gt;
+    &lt;option value=&quot;C&quot;&gt;C&lt;/option&gt;
+    &lt;option v-bind:value=&quot;{ number: 123 }&quot;&gt;123&lt;/option&gt;  
+    &lt;!-- 动态属性可以属性可以不是字符串 --&gt;
+&lt;/select&gt;</code></pre></table></div><h2>1.2、修饰符</h2><div style="margin-left:20px;"><ol>
+<li><code>v-model.lazy=&quot;msg&quot;</code></li>
+<li><code>v-model.number=&quot;age&quot;</code></li>
+<li><code>v-model.trim=&quot;msg&quot;</code></li>
+</ol></div></div></body></html>

@@ -1,0 +1,8 @@
+{    
+    "less.compile": {
+        "compress": false,
+        "sourceMap": false,
+        "out": "${workspaceRoot}\\css\\",
+        "autoprefixer": "> 5%, last 2 Chrome versions, not ie 6-9"
+    }
+}

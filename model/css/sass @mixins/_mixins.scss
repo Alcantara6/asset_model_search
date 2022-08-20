@@ -1,0 +1,326 @@
+/**
+ *  ==================================================Layout布局===================================================
+ */
+// flex弹性布局：默认全部居中
+@mixin flex($dir: row, $jus: center, $ali: center, $wrap: wrap, $inline: block) {
+    display: if($inline==block, flex, inline-flex);
+    flex-direction: $dir;
+    justify-content: $jus;
+    align-items: $ali;
+    flex-wrap: $wrap;
+}
+// 绝对定位居中
+@mixin absCtr {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+// 固定定位居中
+@mixin fixedCtr {
+    position: fixed;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+// 不允许滑动
+@mixin fixedPage {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+/**
+ *  ======================================================版式==========================================================
+ */
+// 默认字体
+@mixin defaultFont {
+    font-size: 12px;
+    font-family: "PingFang SC";
+    line-height: 1;
+}
+// 单行文字省略，须block块
+@mixin ellip {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+// 多行文字截断
+// line-height必须含单位
+@mixin line-clamp($lines, $line-height: 1.3em) {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines; // number of lines to show
+  overflow: hidden;
+  line-height: $line-height;
+  @if unitless($line-height) {   // 如果不带单位
+      $line-height: 1em * $line-height
+  }
+  max-height: $line-height * $lines;
+}
+@mixin setFont($color: #fff, $fs: 12px, $fw: 400) {
+    color: $color;
+    font-size: $fs;
+    font-weight: $fw;
+}
+
+/**
+ *  ==================================================元素=========================================================
+ */
+// 单行文本： 默认居左
+@mixin s-line($fs: 12px, $color: #000, $fw: 400, $w: 100%, $h: auto, $lh: 1, $border: none, $jus: center, $t-ali: left) {
+    width: $w;
+    min-height: $h;
+    line-height: $lh;
+    font-size: $fs;
+    font-weight: $fw;
+    text-align: $t-ali;
+    color: $color;
+    border: $border;
+    @include flex($jus: $jus);
+}
+// 多行文本： 默认行距1.25
+@mixin m-line($fs: 12px, $color: #333, $fw: 400, $w: 100%, $h: auto, $lh: 1.25, $border: none) {
+    width: $w;
+    height: $h;
+    line-height: $lh;
+    font-size: $fs;
+    font-weight: $fw;
+    color: $color;
+    border: $border;
+}
+// 单个button按钮：宽度默认100%，左右padding默认10px,圆角默认5px
+@mixin s-btn($w: 100%, $h: 43px, $mg: 0, $pd: 10px, $fs: 14px, $fw: 400, $color: #fff, $bgc: #f04752, $rds: 5px) {
+    display: inline-block;
+    width: $w;
+    height: $h;
+    line-height: $h;
+    margin: 0 $mg;
+    padding: 0 $pd;
+    font-size: $fs;
+    font-weight: $fw;
+    text-align: center;
+    color: $color;
+    border-radius: $rds;
+    background-color: $bgc;
+}
+// 多个button按钮：flex默认1，左右margin、padding默认10px,圆角默认5px
+@mixin m-btn($flex: 1, $h: 43px, $mg: 10px, $pd: 10px, $fs: 14px, $fw: 400, $color: #fff, $bgc: #f04752, $rds: 5px) {
+    flex: $flex;
+    height: $h;
+    line-height: $h;
+    margin: 0 $mg;
+    padding: 0 $pd;
+    font-size: $fs;
+    font-weight: $fw;
+    text-align: center;
+    color: $color;
+    border-radius: $rds;
+    background-color: $bgc;
+}
+// 遮罩层：存在淡入淡出时，opc无效
+@mixin shade($opc: 0.8) {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, $opc);
+    opacity: $opc;
+}
+// 弹窗： top有值时弹窗
+@mixin popup ($w: 500px, $h: 440px, $top: 0, $bgColor: #fff, $radius: 10px) {
+    @if $top != null {
+        position: fixed;
+        left: 50%;
+        margin-left: -($w/2);
+        top: $top;
+        z-index: 11;
+    }
+    width: $w;
+    min-height: $h;  // 存在不定项时
+    max-height: 90%; // 最大高度
+    background-color: $bgColor;
+    border-radius: $radius;
+}
+// 面板
+@mixin panel($bgcolor: #fff, $padding: 0, $margin: 20px 0, $height: 112px, $txtPadding: 0 32px, $color: #333, $fs: 32px) {
+    background-color: $bgcolor;
+    padding: $padding;
+    margin: $margin;
+    >h4 {
+        height: $height;
+        line-height: $height;
+        padding: $txtPadding;
+        @include ellip();
+        text-align: center;
+        color: $color;
+        font-size: $fs;
+    }
+}
+// 表格
+// 宽度；高度，背景，颜色，字体大小，字体粗细
+@mixin table($w, $rds, $th_h, $th_bg, $th_color, $th_fs, $th_fw, $td_h, $td_bg, $td_color, $td_fs, $td_fw,) {
+    width: $w;
+    border-radius: $rds;
+    text-align: center;
+    .ul {
+        @include flex;
+        @include setFont($td_color, $td_fs, $td_fw);
+        height: $td_h;
+        line-height: $td_h;
+        background: $td_bg;
+        >li {
+            flex: 1;
+            @include flex;
+        }
+    }
+    .th {
+        height: $th_h;
+        line-height: $th_h;
+        background: $th_bg;
+        @include setFont($th_color, $th_fs, $th_fw)
+    }
+}
+/**
+ *  ==========================================================背景=========================================================
+ */
+// 背景图
+@mixin bg-img($url, $color: transparent, $w: 100%, $h: 100%) {
+    background: $color url($url) no-repeat left top;
+    background-size: $w $h;
+}
+@mixin bg-line($hrz, $len, $thickness, $color, $dis: 0) {
+    position: relative;
+    @if $hrz == left {
+        &:before {
+            content: '';
+            height: $len;
+            width: $thickness;
+            background: $color;
+            position: absolute;
+            left: $dis;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    @if $hrz == right {
+        &:after {
+            content: '';
+            height: $len;
+            width: $thickness;
+            background: $color;
+            position: absolute;
+            top: 50%;
+            right: $dis;
+            transform: translateY(-50%);
+        }
+    }
+    @if $hrz == top {
+        &:before {
+            content: '';
+            height: $thickness;
+            width: $len;
+            background: $color;
+            position: absolute;
+            top: $dis;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    @if $hrz == bottom {
+        &:after {
+            content: '';
+            height: $thickness;
+            width: $len;
+            background: $color;
+            position: absolute;
+            bottom: $dis;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+// 左右图片横线背景
+@mixin bg-line-img($w, $hrz, $url, $dis: 0) {
+    position: relative;
+    @if $hrz == left {
+        &:before {
+            content: '';
+            height: 100%;
+            width: $w;
+            position: absolute;
+            top: 0;
+            left: $dis;
+            background: url($url) no-repeat left center;
+            background-size: contain;
+        }
+    }
+    @if $hrz == right {
+        &:after {
+            content: '';
+            height: 100%;
+            width: $w;
+            position: absolute;
+            top: 0;
+            right: $dis;
+            background: url($url) no-repeat right center;
+            background-size: contain;
+        }
+    }
+}
+
+/**
+ * =============================================================表单=====================================================
+ */
+// 手机验证码
+@mixin v-code($min-w: 180px, $mg-r: 16px, $fs: 32px, $color: #c52728) {
+    height: 100%;
+    min-width: $min-w;
+    margin-right: $mg-r;
+    font-size: $fs;
+    color: $color;
+    text-align: right;
+    @include flex;
+}
+// 输入框
+@mixin wx-input($h: 40px, $mg-l: 20px, $fs: 32px, $color: #333) {
+    flex: 1;
+    height: $h;
+    min-height: 0; // 覆盖小程序默认
+    margin-left: $mg-l;
+    font-size: $fs;
+    text-align: left;
+    color: $color;
+}
+// 单选（小程序放大系数）
+@mixin wx-radio($scl: 1) {
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+    transform-origin: left center;
+    font-size: 34rpx;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+/**
+ *  ====================================================效果effect=======================================================
+ */
+@mixin link-colors($normal: #fff, $hover: blue, $visited: green, $active: purple) {
+    color: $noraml;
+    &:hover {
+        color: $hover;
+    }
+    &:visited {
+        color: $visited;
+    }
+    &:active {
+        color: $active;
+    }
+}

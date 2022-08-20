@@ -1,0 +1,17 @@
+.loading > div{
+    margin: 20px;
+    width: .9rem;
+    height: .9rem;
+    border: 3px rgba(0, 0, 0, 0) solid;
+    border-left-color: #ff5500;
+    border-right-color:#0c80fe;
+    border-radius: 100%;
+    -webkit-animation: loading 1s infinite linear;
+    animation: loading 1s infinite linear;
+}
+@-webkit-keyframes loading{
+    from{transform: rotate(0deg)}to{transform: rotate(360deg)}
+}
+@keyframes loading{
+    from{transform: rotate(0deg)}to{transform: rotate(360deg)}
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		.old-dom {
+			width: 1000px;
+			height: 600px;
+			border: 1px solid forestgreen;
+			position: absolute;
+			left: 100px;
+			top: 100px;
+		}
+
+		.new-dom {
+			width: 800px;
+			height: 400px;
+			border: 1px solid salmon;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<div class="block old-dom">
+			原元素
+		</div>
+
+		<div class="block new-dom">
+			新元素
+		</div>
+	</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+	// $('.old-dom').append($('.new-dom'));
+	$('.old-dom').appendTo($('.new-dom'));
+	console.log($('.old-dom').css('width'));
+	
+</script>
+</body>
+</html>

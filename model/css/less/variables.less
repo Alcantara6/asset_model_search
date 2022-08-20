@@ -1,0 +1,41 @@
+// Variable Interpolation
+
+@link-color: #428bca;
+
+@my-selector: banner;
+
+@url-images: "../img";
+
+@route-themes: "../../src/themes";
+
+@property: linear-gradient;
+
+// Variable Variables
+
+.element {
+    color: @@color;
+}
+
+// Lazy Evaluation
+// the last definition of the variable is used
+
+.lazy-eval {
+    width: @var;
+    @a: 9%;
+}
+
+@var: @a;
+@a: 100%;
+
+// Properties as Variables (NEW!)
+
+.widget {
+    color: #efefef;
+    background-color: $color;
+}
+
+// Default Variables
+// use of library, @base-color in library shall be overrided by lazy loading @base-color
+
+@import "library.less";
+@base-color: red;

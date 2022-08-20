@@ -1,0 +1,15 @@
+@import "var";
+
+.p-indent {
+    text-indent: 2em; 
+}
+.color-ul {
+	list-style: none;
+	counter-reset: count;
+	.color-li {
+		&:before {
+			content: "· ";
+			color: $colorRed;
+		}
+	}
+}
